@@ -8,10 +8,10 @@ public class Rooms {
     private Rooms south;
     private Rooms west;
     private Rooms east;
-    boolean westWay;
-    boolean eastWay;
-    boolean northWay;
-    boolean southWay;
+    boolean westWay = false;
+    boolean eastWay = false;
+    boolean northWay = false;
+    boolean southWay = false;
     boolean lock = false;
     boolean dark = false;
 

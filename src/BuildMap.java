@@ -1,20 +1,20 @@
 public class BuildMap {
-    Rooms room, room1, room2, room3, room4, room5, room6, room7, room8, room9;
+    private Rooms room;
 
     public BuildMap() {
-        this.room = room;
+        buildRooms();
     }
 
     public void buildRooms() {
-        room1 = new Rooms("Room 1","Start room");
-        room2 = new Rooms("Room 2","Room Description");
-        room3 = new Rooms("Room 3","Room 3");
-        room4 = new Rooms("Room 4","Room 4");
-        room5 = new Rooms("Room 5","Room 5");
-        room6 = new Rooms("Room 6","Room 6");
-        room7 = new Rooms("Room 7","Room 7");
-        room8 = new Rooms("Room 8","Room 8");
-        room9 = new Rooms("Room 9","Room 9");
+       Rooms room1 = new Rooms("Room 1","Start room");
+       Rooms room2 = new Rooms("Room 2","Room Description");
+       Rooms room3 = new Rooms("Room 3","Room 3");
+       Rooms room4 = new Rooms("Room 4","Room 4");
+       Rooms room5 = new Rooms("Room 5","Room 5");
+       Rooms room6 = new Rooms("Room 6","Room 6");
+       Rooms room7 = new Rooms("Room 7","Room 7");
+       Rooms room8 = new Rooms("Room 8","Room 8");
+       Rooms room9 = new Rooms("Room 9","Room 9");
 
         room1.setEast(room2);
         room1.setSouth(room4);
@@ -33,10 +33,15 @@ public class BuildMap {
         room8.setEast(room9);
         room8.setWest(room7);
         room9.setNorth(room6);
-        room9.setWest(room7);
+        room9.setWest(room8);
         room = room1;
         room2.isDark(true);
         room6.isDark(true);
         room9.isDark(true);
     }
+
+    public Rooms getCurentRoom() {
+        return this.room;
+    }
+
 }
