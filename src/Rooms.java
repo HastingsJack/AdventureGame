@@ -6,10 +6,7 @@ public class Rooms {
     private String roomName;
     private String roomDescription;
     private boolean visited;
-    private Rooms north;
-    private Rooms south;
-    private Rooms west;
-    private Rooms east;
+    private Rooms north, south, west, east;
     boolean westWay = false;
     boolean eastWay = false;
     boolean northWay = false;

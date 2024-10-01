@@ -7,15 +7,15 @@ public class BuildMap {
     }
 
     public void buildRooms() {
-       room1 = new Rooms("Room 1","Start room");
-       room2 = new Rooms("Room 2","Room Description");
-       room3 = new Rooms("Room 3","Room 3");
-       Rooms room4 = new Rooms("Room 4","Room 4");
-       Rooms room5 = new Rooms("Room 5","Room 5");
-       Rooms room6 = new Rooms("Room 6","Room 6");
-       Rooms room7 = new Rooms("Room 7","Room 7");
-       room8 = new Rooms("Room 8","Room 8");
-       Rooms room9 = new Rooms("Room 9","Room 9");
+       room1 = new Rooms("Room 1","Starting Room/The Foyer");
+       room2 = new Rooms("Room 2","The Living Room");
+       room3 = new Rooms("Room 3","The TV Room");
+       room4 = new Rooms("Room 4","The Bathroom");
+       room5 = new Rooms("Room 5","The Basement");
+       room6 = new Rooms("Room 6","The Bedroom");
+       room7 = new Rooms("Room 7","The Laundry Room");
+       room8 = new Rooms("Room 8","The Kitchen");
+       room9 = new Rooms("Room 9","The Sunroom");
 
         room1.setEast(room2);
         room1.setSouth(room4);
@@ -42,12 +42,12 @@ public class BuildMap {
     }
 
     public void buildItems() {
-        Item item1 = new Item("Lamp", "Lamp");
-        Item item2 = new Item("Stick", "Stick");
-        Item item3 = new Item("Ball", "Ball");
-        room1.items.add(item1);
-        room1.items.add(item2);
-        room3.items.add(item3);
+        room1.items.add(new Item("Lamp", "Lamp"));
+        room1.items.add(new Item("Bat", "Bat"));
+        room1.items.add(new Item("Knife", "Knife"));
+        room3.items.add(new Item("Sword", "Sword"));
+        room7.items.add(new Item("Axe", "Axe"));
+        room5.items.add(new Item("Pistol", "Pistol"));
     }
 
     public Rooms getCurentRoom() {

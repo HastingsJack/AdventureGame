@@ -41,7 +41,7 @@ public class Adventure {
 
     public String moveToRoom(String move) {
         if(player.moveToRoom(move) != null) {
-            return "You are now in " + player.getRoom().getName();
+            return "You are now in " + player.getRoom().getRoomDescription();
         }
         return "You cannot go that way";
     }

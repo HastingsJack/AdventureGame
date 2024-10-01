@@ -9,10 +9,9 @@ public class UserInterface {
     }
 
     public void startGame() {
-        System.out.println("Welcome to Jack's Haunted Halloween Adventure");
+        System.out.println("\t\uD83D\uDC7B Welcome to Jack's Haunted Halloween Adventure \uD83D\uDC7B");
         getHelp();
         Scanner scanner = new Scanner(System.in);
-        //System.out.println(adventure.getItem());
         while (true) {
             //System.out.println(adventure.getRoom().getRoomName());
 //            if (this.map.getCurentRoom().dark) {
@@ -35,29 +34,14 @@ public class UserInterface {
                         adventure.getRoom().unlock();
                     }
                     System.out.println(adventure.moveToRoom("south"));
-                    if(adventure.getItem().isEmpty()) {
-                        System.out.println("The room is empty..");
-                    } else {
-                        System.out.println(adventure.getItem());
-                    }
                     break;
                 case "north", "n", "go north", "go n":
                     adventure.getRoom().setNorthWay(true);
                     System.out.println(adventure.moveToRoom("north"));
-                    if(adventure.getItem().isEmpty()) {
-                        System.out.println("The room is empty..");
-                    } else {
-                        System.out.println(adventure.getItem());
-                    }
                     break;
                 case "west", "w", "go west", "go w":
                     adventure.getRoom().setWestWay(true);
                     System.out.println(adventure.moveToRoom("west"));
-                    if(adventure.getItem().isEmpty()) {
-                        System.out.println("The room is empty..");
-                    } else {
-                        System.out.println(adventure.getItem());
-                    }
                     break;
                 case "east", "e", "go east", "go e":
                     adventure.getRoom().setEastWay(true);
@@ -66,13 +50,15 @@ public class UserInterface {
                     }
                     adventure.getRoom().setEastWay(true);
                     System.out.println(adventure.moveToRoom("east"));
+                    break;
+                case "look":
+                    System.out.println(adventure.getPlayer().getRoom().getRoomDescription());
+                    System.out.println(adventure.getPlayer().directionsChecked());
                     if(adventure.getItem().isEmpty()) {
                         System.out.println("The room is empty..");
                     } else {
                         System.out.println(adventure.getItem());
-                    }
-                    break;
-                case "look": System.out.println(adventure.getPlayer().directionsChecked());break;
+                    }break;
                 case "xyzzy": adventure.teleport(); break;
                 case "inventory":
                     System.out.println(adventure.getPlayer().showInventory()); break;
@@ -95,20 +81,22 @@ public class UserInterface {
                         System.out.println("You are not carrying that item.");
                     }
                     break;
-                case "room":
-                    System.out.println(adventure.getPlayer().getRoom().getRoomDescription());
-                    System.out.println(adventure.getItem()); break;
+//                case "room":
+//                    System.out.println(adventure.getPlayer().getRoom().getRoomDescription());
+//                    System.out.println(adventure.getItem()); break;
                 default: System.out.println("Sorry, that is not an accepted command"); break;
             }
         }
     }
 
     public void getHelp() {
-        System.out.println("[] Navigate around the map by using compass directions");
-        System.out.println("[] North, South, East, or West");
-        System.out.println("[] If you'd like to leave the game - type exit to exit");
-        System.out.println("[] If you'd like to look around the room for clues - type look");
-        System.out.println("[] Type help for help");
-        System.out.println("");
+        System.out.println("\uD83C\uDF83 Navigate around the map by using compass directions -- North, South, East or West");
+        System.out.println("\uD83C\uDF83 Exit - to Exit");
+        System.out.println("\uD83C\uDF83 Xyzzy - to teleport");
+        System.out.println("\uD83C\uDF83 Look - to look around the room");
+        System.out.println("\uD83C\uDF83 Help - for help menu");
+        System.out.println("\uD83C\uDF83 Take - to take an item");
+        System.out.println("\uD83C\uDF83 Drop - to drop an item from your inventory");
+        System.out.println("\uD83C\uDF83 Inventory - to check your inventory");
     }
 }
