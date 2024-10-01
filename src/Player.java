@@ -1,12 +1,30 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
     private Rooms room;
     private boolean teleportUsed;
     private Rooms lastRoom;
+    private ArrayList<Item> inventory;
 
     public Player(Rooms room) {
         this.room = room;
+        this.inventory = new ArrayList<>();
+    }
+
+    public void takeItem(Item item) {
+        inventory.add(item);
+    }
+
+    public String showInventory() {
+        String items = "";
+        for(Item item : inventory) {
+            items += item.getName() + "\n";
+        }
+        if(items.length() == 0) {
+            return "Inventory is empty.";
+        }
+        return items;
     }
 
     public void teleport() {
@@ -86,5 +104,31 @@ public class Player {
             room = room.getNorth();
             room.getRoomName();
         }
+    }
+
+    public boolean dropItem(String item) {
+        for(Item it : inventory) {
+            if(it.getName().toLowerCase().equals(item)) {
+                inventory.remove(it);
+                getRoom().addItem(it);
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    public void removeItem(Item item) {
+//        inventory.remove(item);
+//    }
+
+    public boolean containsItem(String item) {
+        for(Item it : getRoom().items) {
+            if(it.getName().toLowerCase().equals(item)) {
+                takeItem(it);
+                getRoom().removeItem(it);
+                return true;
+            }
+        }
+        return false;
     }
 }

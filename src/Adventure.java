@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Adventure {
     private BuildMap map;
     private Player player;
@@ -15,6 +18,23 @@ public class Adventure {
         return player.getRoom();
     }
 
+    public String getItem() {
+        String items = "";
+        int i = 1;
+        for(Item it : getRoom().getItem()) {
+            items += "Item:" + it.getName() + "\n";
+            i++;
+        }
+        return items;
+    }
+
+//    public ArrayList<Item> getItem() {
+//        for(Item it : getRoom().getItem()) {
+//
+//        }
+//        return player.getRoom().getItem();
+//    }
+
     public Player getPlayer() {
         return player;
     }
@@ -29,4 +49,6 @@ public class Adventure {
     public Rooms darkDirection() {
         return darkDirection();
     }
+
+
 }

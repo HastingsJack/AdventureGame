@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Rooms {
@@ -14,15 +16,26 @@ public class Rooms {
     boolean southWay = false;
     boolean lock = false;
     boolean dark = false;
+    ArrayList<Item> items;
+
 
     public Rooms(String roomName, String roomDescription) {
         this.roomName = roomName;
         this.roomDescription = roomDescription;
         this.visited = false;
+        this.items = new ArrayList<>();
     }
 
     public String getRoomName() {
         return roomName;
+    }
+
+    public ArrayList<Item> getItem() {
+        return items;
+    }
+
+    public void addItem(Item Item) {
+        this.items.add(Item);
     }
 
     public Boolean getRoomVisited() {
@@ -106,12 +119,17 @@ public class Rooms {
     }
 
     public boolean unlock() {
-        if(!lock) {
+        if (!lock) {
             System.out.println("The door is locked.");
-            Scanner input = new Scanner(System.in);
-            String locked = input.nextLine();
-            if(locked.equals("unlock")) {
-                lock = true;
+            while (!lock) {
+                Scanner input = new Scanner(System.in);
+                String locked = input.nextLine();
+                if (locked.equals("unlock")) {
+                    lock = true;
+                } else {
+                    System.out.println("Try again");
+                    continue;
+                }
             }
         }
         return true;
@@ -119,15 +137,15 @@ public class Rooms {
 
     public void setDark() {
         Scanner input = new Scanner(System.in);
-        if(dark) {
+        if (dark) {
             System.out.println("The lights are off");
             System.out.println("To turn on the lights type ON");
             System.out.println("Or press Enter to keep the lights off");
             String lights = input.nextLine();
-            if(lights.equals("ON")) {
+            if (lights.equals("ON")) {
                 this.dark = false;
             }
-            if(lights.isEmpty()) {
+            if (lights.isEmpty()) {
                 this.dark = true;
             }
         }
@@ -136,6 +154,23 @@ public class Rooms {
     public void isDark(boolean dark) {
         this.dark = dark;
     }
-}
+
+//    public boolean containsItem(String item) {
+//        for(Item it : items) {
+//            if(it.getName().toLowerCase().equals(item)) {
+//                .takeItem(it);
+//                removeItem(it);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+
+        public void removeItem (Item item){
+            items.remove(item);
+        }
+    }
+
 
 

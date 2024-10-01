@@ -12,8 +12,9 @@ public class UserInterface {
         System.out.println("Welcome to Jack's Haunted Halloween Adventure");
         getHelp();
         Scanner scanner = new Scanner(System.in);
+        //System.out.println(adventure.getItem());
         while (true) {
-            System.out.println(adventure.getRoom().getRoomName());
+            //System.out.println(adventure.getRoom().getRoomName());
 //            if (this.map.getCurentRoom().dark) {
 //                map.getCurentRoom().setDark();
 //                if(map.getCurentRoom().dark) {
@@ -22,6 +23,7 @@ public class UserInterface {
 //                }
 //                continue;
 //            }
+
             System.out.print("Enter a command:");
             String input = scanner.nextLine().toLowerCase();
             if(input.equals("exit")) {System.out.println("Thanks for playing!");break;}
@@ -33,14 +35,29 @@ public class UserInterface {
                         adventure.getRoom().unlock();
                     }
                     System.out.println(adventure.moveToRoom("south"));
+                    if(adventure.getItem().isEmpty()) {
+                        System.out.println("The room is empty..");
+                    } else {
+                        System.out.println(adventure.getItem());
+                    }
                     break;
                 case "north", "n", "go north", "go n":
                     adventure.getRoom().setNorthWay(true);
                     System.out.println(adventure.moveToRoom("north"));
+                    if(adventure.getItem().isEmpty()) {
+                        System.out.println("The room is empty..");
+                    } else {
+                        System.out.println(adventure.getItem());
+                    }
                     break;
                 case "west", "w", "go west", "go w":
                     adventure.getRoom().setWestWay(true);
                     System.out.println(adventure.moveToRoom("west"));
+                    if(adventure.getItem().isEmpty()) {
+                        System.out.println("The room is empty..");
+                    } else {
+                        System.out.println(adventure.getItem());
+                    }
                     break;
                 case "east", "e", "go east", "go e":
                     adventure.getRoom().setEastWay(true);
@@ -49,9 +66,39 @@ public class UserInterface {
                     }
                     adventure.getRoom().setEastWay(true);
                     System.out.println(adventure.moveToRoom("east"));
+                    if(adventure.getItem().isEmpty()) {
+                        System.out.println("The room is empty..");
+                    } else {
+                        System.out.println(adventure.getItem());
+                    }
                     break;
                 case "look": System.out.println(adventure.getPlayer().directionsChecked());break;
                 case "xyzzy": adventure.teleport(); break;
+                case "inventory":
+                    System.out.println(adventure.getPlayer().showInventory()); break;
+                case "take":
+                    System.out.println("Type the name of the item you'd like to pick up");
+                    input = scanner.nextLine().toLowerCase();
+                    if(adventure.getPlayer().containsItem(input)){
+                        System.out.println("You picked the " + input + " up!");
+                    } else {
+                        System.out.println("That item does not exist in this room.");
+                    }
+                    break;
+                case "drop":
+                    System.out.println("Which item would you like to drop?");
+                    System.out.println(adventure.getPlayer().showInventory());
+                    input = scanner.nextLine().toLowerCase();
+                    if(adventure.getPlayer().dropItem(input)){
+                        System.out.println("You dropped your " + input + " in " + adventure.getRoom().getRoomName()+"!");
+                    } else {
+                        System.out.println("You are not carrying that item.");
+                    }
+                    break;
+                case "room":
+                    System.out.println(adventure.getPlayer().getRoom().getRoomDescription());
+                    System.out.println(adventure.getItem()); break;
+                default: System.out.println("Sorry, that is not an accepted command"); break;
             }
         }
     }
