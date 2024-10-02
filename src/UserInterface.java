@@ -9,7 +9,7 @@ public class UserInterface {
     }
 
     public void startGame() {
-        System.out.println("\t\uD83D\uDC7B Welcome to Jack's Haunted Halloween Adventure \uD83D\uDC7B");
+        System.out.println("☠\uFE0F Welcome to Jack's Haunted Halloween Adventure ☠\uFE0F");
         getHelp();
         Scanner scanner = new Scanner(System.in);
         while (true) {
