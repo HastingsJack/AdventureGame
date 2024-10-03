@@ -10,6 +10,7 @@ public class Food extends Item {
         return super.getName();
     }
 
+    @Override
     public int getHealthPoints() {
         return this.healthPoints;
     }

@@ -159,10 +159,8 @@ public class Player {
     public void eatItem(String item) {
         for(Item it : getRoom().items) {
             if(it.getName().toLowerCase().equals(item)) {
-                System.out.println("hi");
                 if(it instanceof Food) {
-                    this.increaseHealth(((Food) it).getHealthPoints());
-                    this.increaseHealth(5);
+                    this.increaseHealth((it.getHealthPoints()));
                 }
             }
         }

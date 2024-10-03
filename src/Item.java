@@ -8,6 +8,10 @@ public class Item {
         this.shortName = shortName;
     }
 
+    public int getHealthPoints() {
+        return this.getHealthPoints();
+    }
+
     public String getName() {
         return this.name;
     }

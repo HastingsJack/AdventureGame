@@ -49,6 +49,7 @@ public class BuildMap {
         room7.items.add(new Item("Axe", "Axe"));
         room5.items.add(new Item("Pistol", "Pistol"));
         room1.items.add(new Food("Apple", "Apple", 25));
+        room1.items.add(new Food("Banana", "Banana", 30));
     }
 
     public Rooms getCurentRoom() {
