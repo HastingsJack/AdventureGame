@@ -7,7 +7,7 @@ public class BuildMap {
     }
 
     public void buildRooms() {
-       room1 = new Rooms("Room 1","Starting Room/The Foyer");
+       room1 = new Rooms("Room 1","The Foyer/Starting Room");
        room2 = new Rooms("Room 2","The Living Room");
        room3 = new Rooms("Room 3","The TV Room");
        room4 = new Rooms("Room 4","The Bathroom");
@@ -36,9 +36,9 @@ public class BuildMap {
         room9.setNorth(room6);
         room9.setWest(room8);
         room = room1;
-        room2.isDark(true);
-        room6.isDark(true);
-        room9.isDark(true);
+//        room2.isDark(true);
+//        room6.isDark(true);
+//        room9.isDark(true);
     }
 
     public void buildItems() {
@@ -48,6 +48,7 @@ public class BuildMap {
         room3.items.add(new Item("Sword", "Sword"));
         room7.items.add(new Item("Axe", "Axe"));
         room5.items.add(new Item("Pistol", "Pistol"));
+        room1.items.add(new Food("Apple", "Apple", 25));
     }
 
     public Rooms getCurentRoom() {

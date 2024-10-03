@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class UserInterface {
@@ -13,10 +12,9 @@ public class UserInterface {
         getHelp();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            //System.out.println(adventure.getRoom().getRoomName());
-//            if (this.map.getCurentRoom().dark) {
-//                map.getCurentRoom().setDark();
-//                if(map.getCurentRoom().dark) {
+//            if (adventure.getRoom().isdark) {
+//                adventure.getRoom().setDark();
+//                if(adventure.getRoom().dark) {
 //                    adventure.darkDirection();
 //                    continue;
 //                }
@@ -29,31 +27,30 @@ public class UserInterface {
             switch(input) {
                 case "help": getHelp(); continue;
                 case "south", "s", "go s", "go south":
-                    adventure.getRoom().setSouthWay(true);
-                    if (adventure.getRoom().getRoomName().equals("Room 4")) {
-                        adventure.getRoom().unlock();
+                    adventure.setWay("South");
+                    if (adventure.getRoomName().equals("Room 4")) {
+                        adventure.unlockRoom();
                     }
                     System.out.println(adventure.moveToRoom("south"));
                     break;
                 case "north", "n", "go north", "go n":
-                    adventure.getRoom().setNorthWay(true);
+                    adventure.setWay("North");
                     System.out.println(adventure.moveToRoom("north"));
                     break;
                 case "west", "w", "go west", "go w":
-                    adventure.getRoom().setWestWay(true);
+                    adventure.setWay("West");
                     System.out.println(adventure.moveToRoom("west"));
                     break;
                 case "east", "e", "go east", "go e":
-                    adventure.getRoom().setEastWay(true);
-                    if (adventure.getRoom().getRoomName().equals("Room 2")) {
-                        adventure.getRoom().unlock();
+                    adventure.setWay("East");
+                    if (adventure.getRoomName().equals("Room 2")) {
+                        adventure.unlockRoom();
                     }
-                    adventure.getRoom().setEastWay(true);
                     System.out.println(adventure.moveToRoom("east"));
                     break;
                 case "look":
-                    System.out.println(adventure.getPlayer().getRoom().getRoomDescription());
-                    System.out.println(adventure.getPlayer().directionsChecked());
+                    System.out.println(adventure.getRoomDescription());
+                    System.out.println(adventure.getDirectionsChecked());
                     if(adventure.getItem().isEmpty()) {
                         System.out.println("The room is empty..");
                     } else {
@@ -61,7 +58,7 @@ public class UserInterface {
                     }break;
                 case "xyzzy": adventure.teleport(); break;
                 case "inventory":
-                    System.out.println(adventure.getPlayer().showInventory()); break;
+                    System.out.println(adventure.getPlayerInventory()); break;
                 case "take":
                     System.out.println("Type the name of the item you'd like to pick up");
                     input = scanner.nextLine().toLowerCase();
@@ -73,17 +70,24 @@ public class UserInterface {
                     break;
                 case "drop":
                     System.out.println("Which item would you like to drop?");
-                    System.out.println(adventure.getPlayer().showInventory());
+                    System.out.println(adventure.getPlayerInventory());
                     input = scanner.nextLine().toLowerCase();
-                    if(adventure.getPlayer().dropItem(input)){
-                        System.out.println("You dropped your " + input + " in " + adventure.getRoom().getRoomName()+"!");
+                    if(adventure.dropPlayerItem(input)){
+                        System.out.println("You dropped your " + input + " in " + adventure.getRoomName()+"!");
                     } else {
                         System.out.println("You are not carrying that item.");
                     }
                     break;
-//                case "room":
-//                    System.out.println(adventure.getPlayer().getRoom().getRoomDescription());
-//                    System.out.println(adventure.getItem()); break;
+                case "health":
+                    System.out.println("HP: " + adventure.getPlayerHealth());
+                    break;
+                case "eat":
+                    input = scanner.nextLine().toLowerCase();
+                    adventure.eatItem(input);
+                    if(adventure.getPlayer().containsItem(input)){
+                        adventure.eatItem(input);
+                    }
+                    break;
                 default: System.out.println("Sorry, that is not an accepted command"); break;
             }
         }
@@ -98,5 +102,6 @@ public class UserInterface {
         System.out.println("\uD83C\uDF83 Take - to take an item");
         System.out.println("\uD83C\uDF83 Drop - to drop an item from your inventory");
         System.out.println("\uD83C\uDF83 Inventory - to check your inventory");
+        System.out.println("\uD83C\uDF83 Health - to check your health");
     }
 }

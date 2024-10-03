@@ -1,15 +1,24 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Player {
     private Rooms room;
     private boolean teleportUsed;
     private Rooms lastRoom;
     private ArrayList<Item> inventory;
+    private int health;
 
-    public Player(Rooms room) {
+    public Player(Rooms room, int health) {
         this.room = room;
         this.inventory = new ArrayList<>();
+        this.health = health;
+    }
+
+    public String getRoomDescription() {
+        return room.getRoomDescription();
+    }
+
+    public String getRoomName() {
+        return room.getRoomName();
     }
 
     public void takeItem(Item item) {
@@ -44,6 +53,25 @@ public class Player {
 
     public Rooms getRoom() {
         return room;
+    }
+
+    public boolean unlockRoom() {
+        return room.unlock();
+    }
+
+    public void setWayTried(String way) {
+        if(way.equals("North")) {
+            room.setNorthWay(true);
+        }
+        if(way.equals("South")) {
+            room.setSouthWay(true);
+        }
+        if(way.equals("East")) {
+            room.setEastWay(true);
+        }
+        if(way.equals("West")) {
+            room.setWestWay(true);
+        }
     }
 
     public Rooms moveToRoom(String move) {
@@ -89,22 +117,22 @@ public class Player {
         return direction;
     }
 
-    public void darkDirection() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if(input.equals("west")) {
-            room = room.getWest();
-            room.getRoomName();
-        }
-        if(input.equals("east")) {
-            room = room.getEast();
-            room.getRoomName();
-        }
-        if(input.equals("north")) {
-            room = room.getNorth();
-            room.getRoomName();
-        }
-    }
+//    public void darkDirection() {
+//        Scanner scanner = new Scanner(System.in);
+//        String input = scanner.nextLine();
+//        if(input.equals("west")) {
+//            room = room.getWest();
+//            room.getRoomName();
+//        }
+//        if(input.equals("east")) {
+//            room = room.getEast();
+//            room.getRoomName();
+//        }
+//        if(input.equals("north")) {
+//            room = room.getNorth();
+//            room.getRoomName();
+//        }
+//    }
 
     public boolean dropItem(String item) {
         for(Item it : inventory) {
@@ -117,10 +145,6 @@ public class Player {
         return false;
     }
 
-//    public void removeItem(Item item) {
-//        inventory.remove(item);
-//    }
-
     public boolean containsItem(String item) {
         for(Item it : getRoom().items) {
             if(it.getName().toLowerCase().equals(item)) {
@@ -131,4 +155,41 @@ public class Player {
         }
         return false;
     }
+
+    public void eatItem(String item) {
+        for(Item it : getRoom().items) {
+            if(it.getName().toLowerCase().equals(item)) {
+                System.out.println("hi");
+                if(it instanceof Food) {
+                    this.increaseHealth(((Food) it).getHealthPoints());
+                    this.increaseHealth(5);
+                }
+            }
+        }
+//        if(this.getFoodItem(item) instanceof Food) {
+//            this.increaseHealth(((Food) this.getFoodItem(item)).getHealthPoints());
+//            this.increaseHealth(5);
+//        }
+    }
+
+    public void increaseHealth(int healthIncrease) {
+        this.health += healthIncrease;
+    }
+
+    public void decreaseHealth(int healthDecrease) {
+        this.health -= healthDecrease;
+    }
+
+    public int getHealth() {
+        return this.health;
+    }
+
+//    public Item getFoodItem(String item) {
+//        for(Item it : getRoom().items) {
+//            if(it.getName().toLowerCase().equals(item)) {
+//                return it;
+//            }
+//        }
+//        return null;
+//    }
 }

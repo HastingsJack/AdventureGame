@@ -1,12 +1,11 @@
-import java.util.ArrayList;
-
 public class Item {
     private String name;
-    private String shortname;
+    private String shortName;
 
+    //change name description
     public Item(String name, String shortName) {
         this.name = name;
-        this.shortname = shortName;
+        this.shortName = shortName;
     }
 
     public String getName() {
@@ -14,6 +13,6 @@ public class Item {
     }
 
     public String toString() {
-        return this.name + " " + this.shortname;
+        return this.name + " " + this.shortName;
     }
 }
