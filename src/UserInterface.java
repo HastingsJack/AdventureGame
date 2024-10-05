@@ -50,7 +50,11 @@ public class UserInterface {
                     break;
                 case "look":
                     System.out.println(adventure.getRoomDescription());
-                    System.out.println(adventure.getDirectionsChecked());
+                    if(adventure.getDirectionsChecked().isEmpty()) {
+
+                    } else {
+                        System.out.println(adventure.getDirectionsChecked());
+                    }
                     if(adventure.getItem().isEmpty()) {
                         System.out.println("The room is empty..");
                     } else {
@@ -60,15 +64,19 @@ public class UserInterface {
                 case "inventory":
                     System.out.println(adventure.getPlayerInventory()); break;
                 case "take":
-                    System.out.println("Type the name of the item you'd like to pick up");
+                    System.out.println("Which item you'd like to pick up");
                     input = scanner.nextLine().toLowerCase();
-                    if(adventure.getPlayer().containsItem(input)){
+                    if(adventure.getPlayer().addToInventory(input)){
                         System.out.println("You picked the " + input + " up!");
                     } else {
-                        System.out.println("That item does not exist in this room.");
+                        System.out.println("Your inventory is full! Drop an item first");
                     }
                     break;
                 case "drop":
+                    if(adventure.getPlayerInventory().isEmpty()) {
+                        System.out.println("Your inventory is empty.");
+                        break;
+                    }
                     System.out.println("Which item would you like to drop?");
                     System.out.println(adventure.getPlayerInventory());
                     input = scanner.nextLine().toLowerCase();
@@ -82,10 +90,37 @@ public class UserInterface {
                     System.out.println("HP: " + adventure.getPlayerHealth());
                     break;
                 case "eat":
+                    System.out.println("What item would you like to eat?");
+                    String food = scanner.nextLine().toLowerCase();
+                    int currentHealth = adventure.getPlayerHealth();
+                    if(adventure.eatItem(food)) {
+                        System.out.println("You ate the " + food);
+                        if(currentHealth > adventure.getPlayerHealth()) {
+                            System.out.println("It was poisonous! You lost health!");
+                        } else {
+                            System.out.println("Delicious! You gained health!");
+                        }
+                    } else if(!adventure.getPlayer().containsItem(food)){
+                        System.out.println("That item is not in this room.");
+                    }else if(!adventure.eatItem(food)) {
+                        System.out.println("That item is not edible.");
+                    }
+                    break;
+                case "drink":
+                    System.out.println("Which item would you like to drink?");
                     input = scanner.nextLine().toLowerCase();
-                    adventure.eatItem(input);
-                    if(adventure.getPlayer().containsItem(input)){
-                        adventure.eatItem(input);
+                    currentHealth = adventure.getPlayerHealth();
+                    if(adventure.drinkItem(input)) {
+                        System.out.println("You drank the " + input);
+                        if(currentHealth > adventure.getPlayerHealth()) {
+                            System.out.println("It was poisonous! You lost health!");
+                        } else {
+                            System.out.println("Delicious! You gained health!");
+                        }
+                    } else if(!adventure.getPlayer().containsItem(input)){
+                        System.out.println("That item is not in this room.");
+                    }else if(!adventure.drinkItem(input)) {
+                        System.out.println("That item is not potable.");
                     }
                     break;
                 default: System.out.println("Sorry, that is not an accepted command"); break;

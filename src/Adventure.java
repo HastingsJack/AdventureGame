@@ -15,28 +15,31 @@ public class Adventure {
         return player.getRoomDescription();
     }
 
+    public String moveToRoom(String move) {
+        if(player.moveToRoom(move) != null) {
+            return "You are now in " + player.getRoom().getRoomDescription();
+        }
+        return "You cannot go that way";
+    }
+
     public String getDirectionsChecked() {
         return player.directionsChecked();
     }
 
-    public String getPlayerInventory() {
-        return player.showInventory();
+    public void setWay(String way) {
+        player.setWayTried(way);
     }
 
     public void teleport() {
         player.teleport();
     }
 
-    public Rooms getRoom() {
-        return player.getRoom();
-    }
-
     public boolean unlockRoom() {
         return player.unlockRoom();
     }
 
-    public void setWay(String way) {
-        player.setWayTried(way);
+    public String getPlayerInventory() {
+        return player.showInventory();
     }
 
     //drop test
@@ -45,32 +48,30 @@ public class Adventure {
     }
 
     public String getItem() {
-        String items = "";
-        int i = 1;
-        for(Item it : getRoom().getItem()) {
-            items += "Item:" + it.getName() + "\n";
-            i++;
-        }
-        return items;
+        return getPlayer().getItems();
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    public String moveToRoom(String move) {
-        if(player.moveToRoom(move) != null) {
-            return "You are now in " + player.getRoom().getRoomDescription();
-        }
-        return "You cannot go that way";
-    }
 
     public int getPlayerHealth() {
         return player.getHealth();
     }
 
-    public void eatItem(String item) {
-        player.eatItem(item);
+    public boolean eatItem(String item) {
+        if(player.eatItem(item)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean drinkItem(String item) {
+        if(player.drinkItem(item)) {
+            return true;
+        }
+        return false;
     }
 
     //dark opgave

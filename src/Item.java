@@ -1,22 +1,28 @@
 public class Item {
     private String name;
-    private String shortName;
+    private String description;
+    private int weight;
 
-    //change name description
-    public Item(String name, String shortName) {
+    public Item(String name, String description, int weight) {
         this.name = name;
-        this.shortName = shortName;
+        this.description = description;
+        this.weight = weight;
     }
 
-    public int getHealthPoints() {
-        return this.getHealthPoints();
+    public int getWeight() {
+        return this.weight;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String toString() {
-        return this.name + " " + this.shortName;
+    public String getItemDescription() {
+        return this.description;
     }
+
+    public String toString() {
+        return this.name + " " + this.description;
+    }
+
 }

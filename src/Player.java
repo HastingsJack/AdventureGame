@@ -6,6 +6,7 @@ public class Player {
     private Rooms lastRoom;
     private ArrayList<Item> inventory;
     private int health;
+    private final int maxWeight = 50;
 
     public Player(Rooms room, int health) {
         this.room = room;
@@ -25,15 +26,37 @@ public class Player {
         inventory.add(item);
     }
 
-    public String showInventory() {
-        String items = "";
-        for(Item item : inventory) {
-            items += item.getName() + "\n";
+    public boolean canAddItem(Item item) {
+        int currentWeight = 0;
+        for(Item it: inventory) {
+            currentWeight += it.getWeight();
         }
-        if(items.length() == 0) {
-            return "Inventory is empty.";
+        if(item.getWeight() + currentWeight <= maxWeight) {
+            return true;
+        }
+        return false;
+    }
+
+    public String showInventory() {
+        if(inventory.size() == 0) {
+            return "";
+        }
+        String items = "\t\t\tWeight: " + currentWeight() + "/" + maxWeight + "\n" + "Item:" + inventory.get(0).getItemDescription() + "  ";
+        for(int i = 1; i < inventory.size(); i++) {
+            items += "Item:" + inventory.get(i).getItemDescription() + "  ";
+            if(i % 2 == 0) {
+                items += "\n";
+            }
         }
         return items;
+    }
+
+    public int currentWeight() {
+        int weight = 0;
+        for(Item it: inventory) {
+            weight += it.getWeight();
+        }
+        return weight;
     }
 
     public void teleport() {
@@ -148,6 +171,16 @@ public class Player {
     public boolean containsItem(String item) {
         for(Item it : getRoom().items) {
             if(it.getName().toLowerCase().equals(item)) {
+                //getRoom().removeItem(it);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean addToInventory(String item) {
+        for(Item it : getRoom().items) {
+            if(it.getName().toLowerCase().equals(item) && canAddItem(it)) {
                 takeItem(it);
                 getRoom().removeItem(it);
                 return true;
@@ -156,38 +189,45 @@ public class Player {
         return false;
     }
 
-    public void eatItem(String item) {
+    public boolean eatItem(String item) {
         for(Item it : getRoom().items) {
             if(it.getName().toLowerCase().equals(item)) {
                 if(it instanceof Food) {
-                    this.increaseHealth((it.getHealthPoints()));
+                    this.changeHealth((((Food)it).getHealthPoints()));
+                    getRoom().removeItem(it);
+                    return true;
                 }
             }
         }
-//        if(this.getFoodItem(item) instanceof Food) {
-//            this.increaseHealth(((Food) this.getFoodItem(item)).getHealthPoints());
-//            this.increaseHealth(5);
-//        }
+        return false;
     }
 
-    public void increaseHealth(int healthIncrease) {
-        this.health += healthIncrease;
+    public boolean drinkItem(String item) {
+        for(Item it : getRoom().items) {
+            if(it.getName().toLowerCase().equals(item)) {
+                if(it instanceof Drink) {
+                    this.changeHealth((((Drink)it).getHealthPoints()));
+                    getRoom().removeItem(it);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    public void decreaseHealth(int healthDecrease) {
-        this.health -= healthDecrease;
+    public void changeHealth(int healthIncrease) {
+        if(this.health + healthIncrease > 100) {
+            this.health = 100;
+        } else {
+            this.health += healthIncrease;
+        }
     }
 
     public int getHealth() {
         return this.health;
     }
 
-//    public Item getFoodItem(String item) {
-//        for(Item it : getRoom().items) {
-//            if(it.getName().toLowerCase().equals(item)) {
-//                return it;
-//            }
-//        }
-//        return null;
-//    }
+    public String getItems() {
+        return room.getItem();
+    }
 }

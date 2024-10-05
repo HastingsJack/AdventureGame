@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class BuildMap {
     private Rooms room, room1, room2, room3, room4, room5, room6, room7, room8, room9;
 
@@ -42,14 +44,16 @@ public class BuildMap {
     }
 
     public void buildItems() {
-        room1.items.add(new Item("Lamp", "Lamp"));
-        room1.items.add(new Item("Bat", "Bat"));
-        room1.items.add(new Item("Knife", "Knife"));
-        room3.items.add(new Item("Sword", "Sword"));
-        room7.items.add(new Item("Axe", "Axe"));
-        room5.items.add(new Item("Pistol", "Pistol"));
-        room1.items.add(new Food("Apple", "Apple", 25));
-        room1.items.add(new Food("Banana", "Banana", 30));
+        room1.items.add(new Item("Lamp", "Lamp", 5));
+        room1.items.add(new Item("Bat", "Bat", 5));
+        room1.items.add(new Item("Knife", "Knife", 5));
+        room3.items.add(new Item("Sword", "Sword", 5));
+        room7.items.add(new Item("Axe", "Axe", 5));
+        room5.items.add(new Item("Pistol", "Pistol", 5));
+        room1.items.add(new Food("Apple", "Green Apple", 2,new Random().nextInt(-30,-10)));
+        room1.items.add(new Food("Banana", "Purple Banana", 2, new Random().nextInt(20,40)));
+        room1.items.add(new Drink("Juice", "Mango Juice", 2, new Random().nextInt(20,40)));
+        room1.items.add(new Drink("Beer", "Budweiser Beer",2, new Random().nextInt(-20,-10)));
     }
 
     public Rooms getCurentRoom() {

@@ -26,8 +26,22 @@ public class Rooms {
         return roomName;
     }
 
-    public ArrayList<Item> getItem() {
-        return items;
+    public String getItem() {
+        if(items.isEmpty()) {
+            return "";
+        }
+        String item = "Item:" + items.get(0).getItemDescription() + "   ";
+        for(int i = 1; i < items.size(); i++) {
+            item += "Item:" + items.get(i).getItemDescription() + "   ";
+            if(i % 2 == 0) {
+                item+="\n";
+            }
+        }
+        return item;
+    }
+
+    public void removeItem (Item item){
+        items.remove(item);
     }
 
     public void addItem(Item Item) {
@@ -150,10 +164,6 @@ public class Rooms {
 //    public void isDark(boolean dark) {
 //        this.dark = dark;
 //    }
-
-    public void removeItem (Item item){
-        items.remove(item);
-    }
 }
 
 
