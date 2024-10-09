@@ -175,9 +175,9 @@ public class Rooms {
         if(this.enemies.isEmpty()) {
             return "";
         }
-        String enemies = "Enemies: ";
-        for(Enemy monster : this.enemies) {
-            enemies += monster.getDescription() + " HP: " + monster.getHealth() + "\n";
+        String enemies = "Enemies: " + this.enemies.get(0).getDescription() + " HP: " + this.enemies.get(0).getHealth() + "\n";
+        for(int i = 1; i < this.enemies.size(); i++) {
+            enemies += "\t\t " + this.enemies.get(i).getDescription() + " HP: " + this.enemies.get(i).getHealth();
         }
         return enemies;
     }

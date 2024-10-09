@@ -41,9 +41,9 @@ public class BuildMap {
         room9.setNorth(room6);
         room9.setWest(room8);
         room = room1;
-        room2.setDark(true);
-//        room6.isDark(true);
-//        room9.isDark(true);
+        //room2.setDark(true);
+        //room6.isDark(true);
+        //room9.isDark(true);
     }
 
     public void buildItems() {
@@ -57,19 +57,23 @@ public class BuildMap {
 
     public void buildFoodAndDrink() {
         room1.items.add(new Food("Apple", "Green Apple", 2,new Random().nextInt(-30,-10)));
-        room1.items.add(new Food("Banana", "Purple Banana", 2, new Random().nextInt(20,40)));
-        room1.items.add(new Drink("Juice", "Mango Juice", 2, new Random().nextInt(20,40)));
-        room1.items.add(new Drink("Beer", "Budweiser Beer",2, new Random().nextInt(-20,-10)));
+        room2.items.add(new Food("Pie", "Pumpkin Pie", 2, new Random().nextInt(20,40)));
+        room3.items.add(new Drink("Juice", "Party Juice", 2, new Random().nextInt(20,40)));
+        room4.items.add(new Drink("Beer", "Budweiser Beer",2, new Random().nextInt(-20,-10)));
+        room4.items.add(new Food("Candy", "Candy Corn", 2, new Random().nextInt(20,40)));
     }
 
     public void buildWeapons() {
-        room1.items.add(new RangedWeapon("Bow", "Bow", 7,15, 5));
+        room1.items.add(new RangedWeapon("Bow", "Bow", 7,1, 5));
         room1.items.add(new MeleeWeapon("Axe", "Axe", 7,5));
     }
 
     public void buildEnemies() {
-        room1.enemies.add(new Enemy("Jason","Jason Voorhees", 15, new MeleeWeapon("Knife", "Jason's Knife", 7, 5)));
-
+        room4.enemies.add(new Enemy("Jason","Jason Voorhees", 15, new MeleeWeapon("Knife", "Jason's Knife", 10, 7)));
+        room6.enemies.add(new Enemy("Clown", "Killer Clown", 20, new MeleeWeapon("Chainsaw", "Chainsaw", 10,7)));
+        room4.enemies.add(new Enemy("Horseman", "Headless Horseman", 20, new MeleeWeapon("Axe", "Death's Axe", 10,7)));
+        room6.enemies.add(new Enemy("Pennywise", "Pennywise",20,new MeleeWeapon("Bat", "Nailbat",10,7)));
+        room8.enemies.add(new Enemy("Werewolf","Werewolf",20,new MeleeWeapon("Claw", "Claw", 10, 7)));
     }
 
     public Rooms getCurentRoom() {

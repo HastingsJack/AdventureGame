@@ -26,10 +26,6 @@ public class Item {
         return this.name;
     }
 
-    public int getAmount() {
-        return this.amount;
-    }
-
     public String getItemDescription() {
         return this.description;
     }
@@ -38,7 +34,6 @@ public class Item {
         return this.name + " " + this.description;
     }
 
-    //weapon test
     public void useAmmo() {
         this.amount -= 1;
     }

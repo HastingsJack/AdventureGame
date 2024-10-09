@@ -9,7 +9,6 @@ public class Player {
     private int health;
     private final int maxWeight = 50;
     private String currentWeapon;
-    private Enemy enemy;
 
     public Player(Rooms room, int health) {
         this.room = room;
@@ -274,6 +273,7 @@ public class Player {
     }
 
     //Checking to see if weapon is equipped and if there is ammo
+    //Responsible for entire attack sequence
     public String useWeapon(String input) {
         String outcome= "";
         for(Item it : inventory) {
@@ -285,7 +285,7 @@ public class Player {
                         outcome += enemy.takeDamage(((Weapon)it).weaponDamage()) + "\n";
                         if(enemy.getHealth() == 0) {
                             getRoom().addItem(enemy.getWeapon());
-                            getRoom().addItem(new Item(enemy.getEnemyName(),enemy.getEnemyName() + "'s body",5));
+                            getRoom().addItem(new Item(enemy.getEnemyName(),enemy.getEnemyName() + "'s body",15));
                             getRoom().enemies.remove(enemy);
                             return outcome;
                         }
@@ -295,6 +295,7 @@ public class Player {
                     }
                 }
             }
+            return "You are out of ammo! Equip or find a new weapon!!";
         }
        return null;
     }

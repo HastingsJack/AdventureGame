@@ -20,7 +20,6 @@ public class UserInterface {
                 }
                 continue;
             }
-
             System.out.print("Enter a command:");
             String input = scanner.nextLine().toLowerCase();
             if(input.equals("exit")) {System.out.println("Thanks for playing!");break;}
@@ -51,6 +50,9 @@ public class UserInterface {
                 case "look":
                     System.out.println(adventure.getRoomDescription());
                     System.out.println();
+                    if(adventure.getEnemies().isEmpty()) {
+                        System.out.println("Luckily, there are no enemies in this room..");
+                    }
                     System.out.println(adventure.getEnemies());
                     if(adventure.getDirectionsChecked().isEmpty()) {
 
