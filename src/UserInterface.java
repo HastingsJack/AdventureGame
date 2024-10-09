@@ -12,14 +12,14 @@ public class UserInterface {
         getHelp();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-//            if (adventure.getRoom().isdark) {
-//                adventure.getRoom().setDark();
-//                if(adventure.getRoom().dark) {
-//                    adventure.darkDirection();
-//                    continue;
-//                }
-//                continue;
-//            }
+            if (adventure.getPlayer().getRoom().isDark()) {
+                adventure.getPlayer().getRoom().setDark();
+                if(adventure.getPlayer().getRoom().isDark()) {
+                    adventure.darkDirection();
+                    continue;
+                }
+                continue;
+            }
 
             System.out.print("Enter a command:");
             String input = scanner.nextLine().toLowerCase();
@@ -68,6 +68,8 @@ public class UserInterface {
                     input = scanner.nextLine().toLowerCase();
                     if(adventure.getPlayer().addToInventory(input)){
                         System.out.println("You picked the " + input + " up!");
+                    } else if(!adventure.getPlayer().containsItem(input)) {
+                        System.out.println("That item is not in this room.");
                     } else {
                         System.out.println("Your inventory is full! Drop an item first");
                     }
@@ -91,18 +93,18 @@ public class UserInterface {
                     break;
                 case "eat":
                     System.out.println("What item would you like to eat?");
-                    String food = scanner.nextLine().toLowerCase();
+                    input = scanner.nextLine().toLowerCase();
                     int currentHealth = adventure.getPlayerHealth();
-                    if(adventure.eatItem(food)) {
-                        System.out.println("You ate the " + food);
+                    if(adventure.eatItem(input)) {
+                        System.out.println("You ate the " + input);
                         if(currentHealth > adventure.getPlayerHealth()) {
                             System.out.println("It was poisonous! You lost health!");
                         } else {
                             System.out.println("Delicious! You gained health!");
                         }
-                    } else if(!adventure.getPlayer().containsItem(food)){
+                    } else if(!adventure.getPlayer().containsItem(input)){
                         System.out.println("That item is not in this room.");
-                    }else if(!adventure.eatItem(food)) {
+                    }else if(!adventure.eatItem(input)) {
                         System.out.println("That item is not edible.");
                     }
                     break;
@@ -123,6 +125,26 @@ public class UserInterface {
                         System.out.println("That item is not potable.");
                     }
                     break;
+                case "equip":
+                    System.out.println("What item would you like to equip?");
+                    System.out.println(adventure.getPlayerInventory());
+                    input = scanner.nextLine().toLowerCase();
+                    if(adventure.hasWeaponToEquip(input)) {
+                        System.out.println("Item equipped!");
+                    } else if (!adventure.checkInventory(input)) {
+                        System.out.println("That item is not in your inventory.");
+                    }
+                    else if(!adventure.hasWeaponToEquip(input)) {
+                        System.out.println("That item is not equipable.");
+                    }
+                    break;
+                case "attack":
+                    if(adventure.getPlayer().getCurrentWeapon().equals("---")) {
+                        System.out.println("You have nothing equipped!");
+                    } else {
+                        adventure.useWeapon();
+                    }
+                    break;
                 default: System.out.println("Sorry, that is not an accepted command"); break;
             }
         }
@@ -138,5 +160,7 @@ public class UserInterface {
         System.out.println("\uD83C\uDF83 Drop - to drop an item from your inventory");
         System.out.println("\uD83C\uDF83 Inventory - to check your inventory");
         System.out.println("\uD83C\uDF83 Health - to check your health");
+        System.out.println("\uD83C\uDF83 Equip - to equip a weapon from your inventory");
+        System.out.println("\uD83C\uDF83 Attack - to attack");
     }
 }

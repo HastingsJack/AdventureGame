@@ -6,6 +6,8 @@ public class BuildMap {
     public BuildMap() {
         buildRooms();
         buildItems();
+        buildFoodAndDrink();
+        buildWeapons();
     }
 
     public void buildRooms() {
@@ -38,7 +40,7 @@ public class BuildMap {
         room9.setNorth(room6);
         room9.setWest(room8);
         room = room1;
-//        room2.isDark(true);
+        room2.setDark(true);
 //        room6.isDark(true);
 //        room9.isDark(true);
     }
@@ -50,10 +52,20 @@ public class BuildMap {
         room3.items.add(new Item("Sword", "Sword", 5));
         room7.items.add(new Item("Axe", "Axe", 5));
         room5.items.add(new Item("Pistol", "Pistol", 5));
+
+    }
+
+    public void buildFoodAndDrink() {
         room1.items.add(new Food("Apple", "Green Apple", 2,new Random().nextInt(-30,-10)));
         room1.items.add(new Food("Banana", "Purple Banana", 2, new Random().nextInt(20,40)));
         room1.items.add(new Drink("Juice", "Mango Juice", 2, new Random().nextInt(20,40)));
         room1.items.add(new Drink("Beer", "Budweiser Beer",2, new Random().nextInt(-20,-10)));
+        room1.items.add(new Item("Arrows", "Arrows", 1, 4));
+    }
+
+    public void buildWeapons() {
+        room1.items.add(new RangedWeapon("Bow", "Bow", 7,15, 5));
+        room1.items.add(new MeleeWeapon("Axe", "Axe", 7, 20));
     }
 
     public Rooms getCurentRoom() {

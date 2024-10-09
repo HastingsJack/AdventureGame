@@ -145,25 +145,29 @@ public class Rooms {
         return true;
     }
 
-//    public void setDark() {
-//        Scanner input = new Scanner(System.in);
-//        if (dark) {
-//            System.out.println("The lights are off");
-//            System.out.println("To turn on the lights type ON");
-//            System.out.println("Or press Enter to keep the lights off");
-//            String lights = input.nextLine();
-//            if (lights.equals("ON")) {
-//                this.dark = false;
-//            }
-//            if (lights.isEmpty()) {
-//                this.dark = true;
-//            }
-//        }
-//    }
+    public void setDark() {
+        Scanner input = new Scanner(System.in);
+        if (dark) {
+            System.out.println("The lights are off");
+            System.out.println("To turn on the lights type ON");
+            System.out.println("Or press Enter to keep the lights off");
+            String lights = input.nextLine();
+            if (lights.equals("ON")) {
+                this.dark = false;
+            }
+            if (lights.isEmpty()) {
+                this.dark = true;
+            }
+        }
+    }
 
-//    public void isDark(boolean dark) {
-//        this.dark = dark;
-//    }
+    public void setDark(boolean dark) {
+        this.dark = dark;
+    }
+
+    public boolean isDark() {
+        return this.dark;
+    }
 }
 
 
