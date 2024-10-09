@@ -61,7 +61,7 @@ public class Adventure {
 
     //Retrieving an item
     public String getItem() {
-        return getPlayer().getItems();
+        return player.getItems();
     }
 
     //Player's current location
@@ -107,7 +107,11 @@ public class Adventure {
     }
 
     //Using equipped weapon
-    public void useWeapon() {
-        player.useWeapon();
+    public String useWeapon(String input) {
+        return player.useWeapon(input);
+    }
+
+    public String getEnemies() {
+        return player.getEnemies();
     }
 }

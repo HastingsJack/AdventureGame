@@ -11,9 +11,13 @@ public class RangedWeapon extends Weapon {
     public void useWeapon() {
         if(this.ammo - 1 >= 0) {
             this.ammo -= 1;
-            System.out.println("You shoot your ranged weapon.");
-        } else {
-            System.out.println("You are out of ammo!");
+            System.out.println("PEW!");
+        }
+        if(this.ammo == 1) {
+            System.out.println("You have only one shot left!");
+        }
+        if(this.ammo == 0) {
+            System.out.println("You are now out of ammo!");
         }
     }
 
@@ -34,5 +38,10 @@ public class RangedWeapon extends Weapon {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int weaponDamage() {
+        return super.damage;
     }
 }

@@ -9,6 +9,7 @@ public class Player {
     private int health;
     private final int maxWeight = 50;
     private String currentWeapon;
+    private Enemy enemy;
 
     public Player(Rooms room, int health) {
         this.room = room;
@@ -273,13 +274,29 @@ public class Player {
     }
 
     //Checking to see if weapon is equipped and if there is ammo
-    public void useWeapon() {
-       for(Item it : inventory) {
-           if(((Weapon)it).isEquipped() && ((Weapon)it).canUseWeapon()) {
-               it.useAmmo();
-               ((Weapon)it).useWeapon();
-           }
-       }
+    public String useWeapon(String input) {
+        String outcome= "";
+        for(Item it : inventory) {
+            if(((Weapon)it).isEquipped() && ((Weapon)it).canUseWeapon()) {
+                it.useAmmo();
+                ((Weapon)it).useWeapon();
+                for(Enemy enemy : getRoom().enemies) {
+                    if(input.toLowerCase().equals(enemy.getEnemyName().toLowerCase())) {
+                        outcome += enemy.takeDamage(((Weapon)it).weaponDamage()) + "\n";
+                        if(enemy.getHealth() == 0) {
+                            getRoom().addItem(enemy.getWeapon());
+                            getRoom().addItem(new Item(enemy.getEnemyName(),enemy.getEnemyName() + "'s body",5));
+                            getRoom().enemies.remove(enemy);
+                            return outcome;
+                        }
+                        int damage = takeDamage(enemy.getWeapon().weaponDamage());
+                        outcome += enemy.getEnemyName() + " attacks!  You took " + damage + " damage!";
+                        return outcome;
+                    }
+                }
+            }
+        }
+       return null;
     }
 
     //Checking to see if item is a weapon that can be equipped
@@ -313,5 +330,14 @@ public class Player {
             }
         }
         getRoom().items.remove(item);
+    }
+
+    public String getEnemies() {
+        return room.getEnemies();
+    }
+
+    public int takeDamage(int damage) {
+        this.health -= damage;
+        return damage;
     }
 }

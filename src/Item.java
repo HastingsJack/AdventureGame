@@ -3,6 +3,7 @@ public class Item {
     private String description;
     private int weight;
     private int amount;
+    int damage;
 
     public Item(String name, String description, int weight) {
         this.name = name;
@@ -10,11 +11,11 @@ public class Item {
         this.weight = weight;
     }
 
-    public Item(String name, String description, int weight, int amount) {
+    public Item(String name, String description, int weight, int damage) {
         this.name = name;
         this.description = description;
         this.weight = weight;
-        this.amount = amount;
+        this.damage = damage;
     }
 
     public int getWeight() {

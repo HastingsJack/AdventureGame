@@ -26,4 +26,9 @@ public class MeleeWeapon extends Weapon{
         return true;
     }
 
+    @Override
+    public int weaponDamage() {
+        return super.damage;
+    }
+
 }

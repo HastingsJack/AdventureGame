@@ -13,6 +13,7 @@ public class Rooms {
     private boolean lock = false;
     private boolean dark = false;
     ArrayList<Item> items;
+    ArrayList<Enemy> enemies;
 
 
     public Rooms(String roomName, String roomDescription) {
@@ -20,6 +21,7 @@ public class Rooms {
         this.roomDescription = roomDescription;
         this.visited = false;
         this.items = new ArrayList<>();
+        this.enemies = new ArrayList<>();
     }
 
     public String getRoomName() {
@@ -168,6 +170,18 @@ public class Rooms {
     public boolean isDark() {
         return this.dark;
     }
+
+    public String getEnemies() {
+        if(this.enemies.isEmpty()) {
+            return "";
+        }
+        String enemies = "Enemies: ";
+        for(Enemy monster : this.enemies) {
+            enemies += monster.getDescription() + " HP: " + monster.getHealth() + "\n";
+        }
+        return enemies;
+    }
+
 }
 
 

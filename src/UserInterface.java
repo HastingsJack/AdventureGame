@@ -50,6 +50,8 @@ public class UserInterface {
                     break;
                 case "look":
                     System.out.println(adventure.getRoomDescription());
+                    System.out.println();
+                    System.out.println(adventure.getEnemies());
                     if(adventure.getDirectionsChecked().isEmpty()) {
 
                     } else {
@@ -139,12 +141,21 @@ public class UserInterface {
                     }
                     break;
                 case "attack":
-                    if(adventure.getPlayer().getCurrentWeapon().equals("---")) {
-                        System.out.println("You have nothing equipped!");
+                    if(!(adventure.getEnemies().isEmpty())) {
+                        System.out.println("Who would you like to attack?");
+                        System.out.println(adventure.getEnemies());
+                        input = scanner.nextLine().toLowerCase();
+                        if(adventure.getPlayer().getCurrentWeapon().equals("---")) {
+                            System.out.println("You have nothing equipped!");
+                            break;
+                        } else {
+                            System.out.println(adventure.useWeapon(input));
+                        }
+                        break;
                     } else {
-                        adventure.useWeapon();
+                        System.out.println("The are no enemies in this room!");
+                        break;
                     }
-                    break;
                 default: System.out.println("Sorry, that is not an accepted command"); break;
             }
         }
