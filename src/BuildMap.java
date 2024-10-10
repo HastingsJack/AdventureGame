@@ -64,12 +64,12 @@ public class BuildMap {
     }
 
     public void buildWeapons() {
-        room1.items.add(new RangedWeapon("Bow", "Bow", 7,1, 5));
+        room1.items.add(new RangedWeapon("Bow", "Bow", 7,8, 5));
         room1.items.add(new MeleeWeapon("Axe", "Axe", 7,5));
     }
 
     public void buildEnemies() {
-        room4.enemies.add(new Enemy("Jason","Jason Voorhees", 15, new MeleeWeapon("Knife", "Jason's Knife", 10, 7)));
+        room1.enemies.add(new Enemy("Jason","Jason Voorhees", 15, new MeleeWeapon("Knife", "Jason's Knife", 10, 7)));
         room6.enemies.add(new Enemy("Clown", "Killer Clown", 20, new MeleeWeapon("Chainsaw", "Chainsaw", 10,7)));
         room4.enemies.add(new Enemy("Horseman", "Headless Horseman", 20, new MeleeWeapon("Axe", "Death's Axe", 10,7)));
         room6.enemies.add(new Enemy("Pennywise", "Pennywise",20,new MeleeWeapon("Bat", "Nailbat",10,7)));

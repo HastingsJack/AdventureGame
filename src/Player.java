@@ -285,7 +285,7 @@ public class Player {
                         outcome += enemy.takeDamage(((Weapon)it).weaponDamage()) + "\n";
                         if(enemy.getHealth() == 0) {
                             getRoom().addItem(enemy.getWeapon());
-                            getRoom().addItem(new Item(enemy.getEnemyName(),enemy.getEnemyName() + "'s body",15));
+                            getRoom().addItem(new Food("head",enemy.getEnemyName() + "'s head",15,25));
                             getRoom().enemies.remove(enemy);
                             return outcome;
                         }
