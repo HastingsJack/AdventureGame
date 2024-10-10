@@ -19,7 +19,12 @@ public class Adventure {
     //Movement
     public String moveToRoom(String move) {
         if(player.moveToRoom(move) != null) {
-            return "You are now in " + player.getRoom().getRoomDescription() + "\n" + player.getEnemies();
+            String playermove = "You are now in " + player.getRoom().getRoomDescription();
+            if(!(player.getEnemies().isEmpty())) {
+                playermove += "\n" + player.getEnemies();
+            }
+            //return "You are now in " + player.getRoom().getRoomDescription() + "\n" + player.getEnemies();
+            return playermove;
         }
         return "You cannot go that way";
     }

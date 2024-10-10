@@ -47,25 +47,26 @@ public class BuildMap {
     }
 
     public void buildItems() {
-        room1.items.add(new Item("Lamp", "Lamp", 5));
-        room1.items.add(new Item("Bat", "Bat", 5));
+        room4.items.add(new Item("Lamp", "Lamp", 5));
+        room2.items.add(new Item("Bat", "Bat", 5));
         room3.items.add(new Item("Sword", "Sword", 5));
         room7.items.add(new Item("Axe", "Axe", 5));
-        room5.items.add(new Item("Pistol", "Pistol", 5));
+        room4.items.add(new Item("Pistol", "Pistol", 5));
 
     }
 
     public void buildFoodAndDrink() {
         room1.items.add(new Food("Apple", "Green Apple", 2,new Random().nextInt(-30,-10)));
         room2.items.add(new Food("Pie", "Pumpkin Pie", 2, new Random().nextInt(20,40)));
-        room3.items.add(new Drink("Juice", "Party Juice", 2, new Random().nextInt(20,40)));
+        room3.items.add(new Drink("Juice", "Jungle Juice", 2, new Random().nextInt(20,40)));
         room4.items.add(new Drink("Beer", "Budweiser Beer",2, new Random().nextInt(-20,-10)));
         room4.items.add(new Food("Candy", "Candy Corn", 2, new Random().nextInt(20,40)));
+        room2.items.add(new Food("Knife", "Chocolate Knife",2, new Random().nextInt(20,40)));
     }
 
     public void buildWeapons() {
-        room1.items.add(new RangedWeapon("Bow", "Bow", 7,8, 5));
-        room1.items.add(new MeleeWeapon("Axe", "Axe", 7,5));
+        room1.items.add(new RangedWeapon("Shotgun", "Double-barreled Shotgun", 7,8, 5));
+        room3.items.add(new MeleeWeapon("Knife", "Knife", 7,5));
     }
 
     public void buildEnemies() {

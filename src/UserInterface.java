@@ -49,21 +49,16 @@ public class UserInterface {
                     break;
                 case "look":
                     System.out.println(adventure.getRoomDescription());
-                    System.out.println();
                     if(adventure.getEnemies().isEmpty()) {
-                        System.out.println("Luckily, there are no enemies in this room..");
-                    }
-                    System.out.println(adventure.getEnemies());
-                    if(adventure.getDirectionsChecked().isEmpty()) {
-
+                        System.out.println("There are no enemies in this room..");
                     } else {
+                        System.out.println(adventure.getEnemies());
+                    }
+                    if(!(adventure.getDirectionsChecked().isEmpty())) {
                         System.out.println(adventure.getDirectionsChecked());
                     }
-                    if(adventure.getItem().isEmpty()) {
-                        System.out.println("The room is empty..");
-                    } else {
-                        System.out.println(adventure.getItem());
-                    }break;
+                    System.out.println(adventure.getItem());
+                    break;
                 case "xyzzy": adventure.teleport(); break;
                 case "inventory":
                     System.out.println(adventure.getPlayerInventory()); break;
@@ -97,10 +92,11 @@ public class UserInterface {
                     break;
                 case "eat":
                     System.out.println("What item would you like to eat?");
+                    System.out.println(adventure.getItem());
                     input = scanner.nextLine().toLowerCase();
                     int currentHealth = adventure.getPlayerHealth();
                     if(adventure.eatItem(input)) {
-                        System.out.println("You ate the " + input);
+                        System.out.println("You ate the " + input + "!");
                         if(currentHealth > adventure.getPlayerHealth()) {
                             System.out.println("It was poisonous! You lost health!");
                         } else {
@@ -114,6 +110,7 @@ public class UserInterface {
                     break;
                 case "drink":
                     System.out.println("Which item would you like to drink?");
+                    System.out.println(adventure.getItem());
                     input = scanner.nextLine().toLowerCase();
                     currentHealth = adventure.getPlayerHealth();
                     if(adventure.drinkItem(input)) {

@@ -30,13 +30,15 @@ public class Rooms {
 
     public String getItem() {
         if(items.isEmpty()) {
-            return "";
+            return "The room is empty..";
         }
         String item = "Item:" + items.get(0).getItemDescription() + "   ";
         for(int i = 1; i < items.size(); i++) {
             item += "Item:" + items.get(i).getItemDescription() + "   ";
-            if(i % 2 == 0) {
-                item+="\n";
+            if(items.size() > 3) {
+                if(i % 2 == 0) {
+                    item+="\n";
+                }
             }
         }
         return item;
@@ -175,9 +177,9 @@ public class Rooms {
         if(this.enemies.isEmpty()) {
             return "";
         }
-        String enemies = "Enemies: " + this.enemies.get(0).getDescription() + " HP: " + this.enemies.get(0).getHealth() + "\n";
+        String enemies = "ENEMIES: " + this.enemies.get(0).getDescription() + "  HP: " + this.enemies.get(0).getHealth();
         for(int i = 1; i < this.enemies.size(); i++) {
-            enemies += "\t\t " + this.enemies.get(i).getDescription() + " HP: " + this.enemies.get(i).getHealth();
+            enemies += "\n\t\t " + this.enemies.get(i).getDescription() + "  HP: " + this.enemies.get(i).getHealth();
         }
         return enemies;
     }
